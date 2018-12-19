@@ -1,6 +1,6 @@
 server:
   port: 8989
-  context-path: /emp
+  context-path: /cmfz
   jsp-servlet:
     init-parameters:
       development: true
