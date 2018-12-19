@@ -1,0 +1,19 @@
+server:
+  port: 8989
+  context-path: /emp
+  jsp-servlet:
+    init-parameters:
+      development: true
+spring:
+  datasource:
+    type:  com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/cmfz?characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+mybatis:
+  type-aliases-package: com.baizhi.yqs.entity
