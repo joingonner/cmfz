@@ -11,7 +11,7 @@ public class AdminController {
     @Autowired
     AdminService adminService;
     @RequestMapping("getOneAd")
-    public Admin getOneAd(){
+    public Admin getOneAd(Admin admin,String code){
        Admin admin1= adminService.getOne(new Admin(null,"wasd","123456"));
         System.out.println(admin1);
        return admin1;
