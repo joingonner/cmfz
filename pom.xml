@@ -64,6 +64,13 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <!--集成fastjson-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.54</version>
+        </dependency>
     </dependencies>
 
     <build>

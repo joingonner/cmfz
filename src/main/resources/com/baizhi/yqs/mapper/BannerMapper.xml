@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.yqs.mapper.BannerMapper">
+    <select id="selectByPage" resultType="Banner">
+        select id,title,img_path imgPath,status,pub_date pubDate,description from banner limit ${(curPage-1)*pageSize},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int">
+        select count(*)from banner
+    </select>
+</mapper>
