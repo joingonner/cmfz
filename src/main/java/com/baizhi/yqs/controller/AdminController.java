@@ -7,15 +7,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 
 public class AdminController {
     @Autowired
     AdminService adminService;
-    @RequestMapping("getOneAd")
-    public String  getOneAd(Admin admin,String code){
-       Admin admin1= adminService.getOne(new Admin(null,"wasd","123456"));
-        System.out.println(admin1);
-       return "main/main";
+    @RequestMapping("login")
+    public String login(Admin admin, HttpSession session){
+        boolean b = adminService.login(admin);
+        if (b){
+            session.setAttribute("admin",admin);
+            return "redirect:main/main.jsp";
+        }
+        else return "redirect:login.jsp";
     }
 }

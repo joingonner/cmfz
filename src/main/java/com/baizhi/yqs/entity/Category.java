@@ -3,18 +3,19 @@ package com.baizhi.yqs.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Admin implements Serializable {
-    @Id
-    @KeySql(useGeneratedKeys = true)
+@Table(name="menu")
+public class Category implements Serializable {
     private Integer id;
-    private String username;
-    private String password;
+    private String title;
+    private String url;
+    private String iconcls;
+    private Category category;
 }
