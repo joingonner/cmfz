@@ -3,17 +3,19 @@ package com.baizhi.yqs.controller;
 import com.baizhi.yqs.entity.Admin;
 import com.baizhi.yqs.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
+
 public class AdminController {
     @Autowired
     AdminService adminService;
     @RequestMapping("getOneAd")
-    public Admin getOneAd(Admin admin,String code){
+    public String  getOneAd(Admin admin,String code){
        Admin admin1= adminService.getOne(new Admin(null,"wasd","123456"));
         System.out.println(admin1);
-       return admin1;
+       return "main/main";
     }
 }
