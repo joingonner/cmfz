@@ -8,4 +8,7 @@ import java.util.List;
 public interface BannerMapper {
     List<Banner> selectByPage(@Param("curPage" )Integer curPage,@Param("pageSize")Integer pageSize);
     int selectCount();
+    void updateOne(Banner banner);
+    void insertOne(Banner banner);
+    void deleteOne(Integer id);
 }

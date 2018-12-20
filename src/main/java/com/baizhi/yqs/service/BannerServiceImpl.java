@@ -26,4 +26,19 @@ public class BannerServiceImpl implements BannerService{
         int i = bannerMapper.selectCount();
         return i;
     }
+
+    @Override
+    public void changeOne(Banner banner) {
+        bannerMapper.updateOne(banner);
+    }
+
+    @Override
+    public void addOne(Banner banner) {
+        bannerMapper.insertOne(banner);
+    }
+
+    @Override
+    public void removeOne(Integer id) {
+        bannerMapper.deleteOne(id);
+    }
 }

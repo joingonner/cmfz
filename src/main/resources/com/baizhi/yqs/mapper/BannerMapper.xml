@@ -7,4 +7,13 @@
     <select id="selectCount" resultType="int">
         select count(*)from banner
     </select>
+<update id="updateOne" parameterType="Banner">
+    update banner set status=#{status} where id=#{id}
+</update>
+    <insert id="insertOne" parameterType="Banner">
+        insert into banner values(#{id},#{title},#{imgPath},#{status},#{pubDate},#{description})
+    </insert>
+    <delete id="deleteOne" parameterType="int">
+        delete from banner where id=#{id}
+    </delete>
 </mapper>

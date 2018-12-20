@@ -1,11 +1,21 @@
 <%@page pageEncoding="utf-8" isELIgnored="false" %>
 <script type="text/javascript">
     $(function () {
+        //删除
+        $("dg").edatagrid("destroyRow");
+        //添加
+        $("#addBanner").dialog({
+            width : 400,
+            height : 200,
+            title : '添加用户',
+            href : "${pageContext.request.contextPath }/main/addBanner.jsp",
+            closed : true
+        });
         var toolbar=[{
             iconCls: 'icon-add',
             text:"添加",
             handler: function () {
-                alert('编辑按钮')
+                $("#addBanner").dialog("open");
             }
         }, '-', {
             iconCls: 'icon-edit',
@@ -23,7 +33,18 @@
             text:"删除",
             iconCls: 'icon-no',
             handler: function () {
-                alert('帮助按钮')
+                var row= $("#dg").edatagrid("getSelected");
+                if(row!=null){
+                    var index = $("#dg").edatagrid("getRowIndex",row);
+                    $("#dg").edatagrid("destroyRow",index);
+                    var id = row.id;
+                    console.log(id)
+                    $.get("${pageContext.request.contextPath}/removeOne",
+                        "id="+id
+                    )
+                }else{
+                    alert("请先选中修改行")
+                }
             }
         },  '-',{
             text:"保存",
@@ -66,3 +87,4 @@
 
 </script>
 <table id="dg"></table>
+<div id="addBanner"></div>
