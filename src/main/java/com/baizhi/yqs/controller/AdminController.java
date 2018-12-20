@@ -15,7 +15,10 @@ public class AdminController {
     @Autowired
     AdminService adminService;
     @RequestMapping("login")
-    public String login(Admin admin, HttpSession session){
+    public String login(Admin admin, HttpSession session,String enCode){
+        String  code = (String) session.getAttribute("code");
+        boolean equals = enCode.equals(code);
+        System.out.println(equals);
         boolean b = adminService.login(admin);
         if (b){
             session.setAttribute("admin",admin);

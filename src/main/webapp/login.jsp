@@ -15,12 +15,12 @@
 	<script type="text/javascript">
 
         $(function(){
-            /*//点击更换验证码：
-            $("#captchaImage").click(function(){//点击更换验证码
+            //点击更换验证码：
+         /*   $("#captchaImage").click(function(){//点击更换验证码
+				$.get("${pageContext.request.contextPath}/image");
+            });*/
 
-            });
-
-            //  form 表单提交
+            /*//  form 表单提交
             $("#loginForm").bind("submit",function(){
                 alert("自己做");
                 return false;
@@ -60,7 +60,7 @@
 				<th>验证码:</th>
 				<td>
 					<input type="text" id="enCode" name="enCode" class="text captcha" maxlength="4" autocomplete="off"/>
-					<img id="captchaImage" class="captchaImage" src="${sessionScope.image}" title="点击更换验证码"/>
+					<img id="captchaImage" class="captchaImage"  onclick="this.src='${pageContext.request.contextPath}/image?'+Math.random()" src="${pageContext.request.contextPath}/image" title="点击更换验证码"/>
 				</td>
 			</tr>
 			<tr>
