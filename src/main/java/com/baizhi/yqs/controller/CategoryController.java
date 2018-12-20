@@ -27,7 +27,8 @@ public class CategoryController {
 
     @RequestMapping("queryOne")
     public Category queryOne(Integer id){
-       return categoryService.queryOne(id);
+        System.out.println(id);
+      return categoryService.queryOne(id);
     }
 
 }
