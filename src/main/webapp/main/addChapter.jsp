@@ -74,8 +74,8 @@
 
 <form id="addAlbumTable" method="post" enctype="multipart/form-data">
     标题：<input id="addTableCtitle" name="title"/><br/>
-    大小：<input id="addTableCsize" name="size"/><br/>
-    时长：<input id="addTableCduration" name="duration"/><br/>
+   <%-- 大小：<input id="addTableCsize" name="size"/><br/>
+    时长：<input id="addTableCduration" name="duration"/><br/>--%>
     文件：<input id="addTableCurl" type="file" name="path"/><br/>
     分组：<select id="addTableCaid" name="aid">
 </select><br/>

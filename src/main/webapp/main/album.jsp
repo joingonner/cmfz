@@ -52,7 +52,22 @@
         text: "音频下载",
         iconCls: 'icon-save',
         handler: function () {
-            $("#dg").edatagrid("saveRow")
+            var row = $("#album").treegrid("getSelected");
+            if (row != null) {
+                //编辑指定行
+                /* $("#addChapterDialog").dialog("open");*/
+                if(row.id%1 ===0 ){
+                    alert("请选择音频");
+                }else {
+                    location.href="${pageContext.request.contextPath}/addFile/download?musicName="+row.url;
+                }
+
+
+                /* $("#album").edatagrid("editRow", index);*/
+
+            } else {
+                alert("请先选中行")
+            }
 
         }
     }]
@@ -69,14 +84,28 @@
             fit: true,
             fitColumns: true,
             toolbar: toolbar,
+            onDblClickRow:playAudio,
             pagination: true,
             pageSize: 2,
             pageList: [2, 5, 7]
         });
+        //双击播放音频
+        function playAudio(row){
+            if(row.url != null && row.url != ""){
+                console.log(row.url);
+                $("#player").prop("src","${pageContext.request.contextPath}/music/"+row.url);
+            }else{
+                $.messager.alert("警告","请双击要播放的章节!");
+            }
+        }
     })
 
 </script>
-
+<table id="album">
+    <audio id="player" controls="controls" autoplay="autoplay">
+        <source src=""/>
+    </audio>
+</table>
 <table id="album"></table>
 <div id="updateAlbum"></div>
 <div id="addAlbum"></div>

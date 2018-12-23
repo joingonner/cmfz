@@ -91,6 +91,12 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.5</version>
         </dependency>
+        <!--jave-->
+        <dependency>
+            <groupId>com.jave</groupId>
+            <artifactId>jave</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
