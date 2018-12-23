@@ -2,6 +2,7 @@ package com.baizhi.yqs.mapper;
 
 import com.baizhi.yqs.entity.Banner;
 import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 

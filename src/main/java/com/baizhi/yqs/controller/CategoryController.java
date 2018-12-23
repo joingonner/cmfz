@@ -20,14 +20,14 @@ public class CategoryController {
     @RequestMapping("queryAll")
     public List<Category> queryAll(HttpSession session){
         List<Category> categoryList = categoryService.queryAll();
-        System.out.println(categoryList);
+
         session.setAttribute("catelist",categoryList);
         return categoryList;
     }
 
     @RequestMapping("queryOne")
     public Category queryOne(Integer id){
-        System.out.println(id);
+
       return categoryService.queryOne(id);
     }
 

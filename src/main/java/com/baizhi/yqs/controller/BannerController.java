@@ -2,7 +2,9 @@ package com.baizhi.yqs.controller;
 
 import com.baizhi.yqs.dto.BannerDto;
 import com.baizhi.yqs.entity.Banner;
+import com.baizhi.yqs.mapper.BannerMapper;
 import com.baizhi.yqs.service.BannerService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,18 +15,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
 public class BannerController {
     @Autowired
     BannerService bannerService;
+    @Autowired
+    BannerMapper bannerMapper;
+
 
     @RequestMapping("page")
     public BannerDto getPageController(Integer page, Integer rows) {
         System.out.println(page);
         System.out.println(rows);
         BannerDto dto = new BannerDto();
+        /*PageHelper.startPage(page,rows);
+        //查询全部，据就行，通用mapper不能用了？忘了继承Mapper
+        List<Banner> bannerList = bannerMapper.selectAll();
+        int m = bannerMapper.selectCount();*/
+
         dto.setRows(bannerService.queryByPage(page, rows));
         dto.setTotal(bannerService.queryCount());
         System.out.println(dto);
@@ -57,7 +68,7 @@ public class BannerController {
             img.transferTo(file);
             //2.插入banner到数据库（img的名字存到banner）
             banner.setImgPath(filename);
-            System.out.println(banner);
+
             bannerService.addOne(banner);
         } catch (IOException e) {
             e.printStackTrace();

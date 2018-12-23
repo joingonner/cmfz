@@ -5,7 +5,6 @@ import com.baizhi.yqs.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +17,7 @@ public class AdminController {
     public String login(Admin admin, HttpSession session,String enCode){
         String  code = (String) session.getAttribute("code");
         boolean equals = enCode.equals(code);
-        System.out.println(equals);
+        //System.out.println(equals);
         boolean b = adminService.login(admin);
         if (b){
             session.setAttribute("admin",admin);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.yqs.mapper.AlbumMapper">
+    <resultMap id="res" type="Album">
+        <id column="pid" property="id"></id>
+        <result column="ptitle" property="title"></result>
+        <result column="pcount" property="count"></result>
+        <result column="pcoverimg" property="coverImg"></result>
+        <result column="pscore" property="score"></result>
+        <result column="pauther" property="auther"></result>
+        <result column="pbroadcast" property="broadcast"></result>
+        <result column="pbrief" property="brief"></result>
+        <result column="ppubdate" property="pubDate"></result>
+        <collection property="children" ofType="Chapter">
+            <id column="sid" property="id"></id>
+            <result column="stitle" property="title"></result>
+            <result column="ssize" property="size"></result>
+            <result column="sduration" property="duration"></result>
+            <result column="surl" property="url"></result>
+            <result column="suploaddate" property="uploadDate"></result>
+            <result column="said" property="Aid"></result>
+        </collection>
+    </resultMap>
+    <select id="selectByPage" resultMap="res">
+        select p.id pid,p.title ptitle,p.count pcount,p.cover_img pcoverimg,p.score pscore,p.auther pauther,p.broadcast pbroadcast,p.brief pbrief,p.pub_date ppubdate,s.id sid,s.title stitle,s.size ssize,s.duration sduration,s.url surl,s.upload_date suploaddate,s.a_id said
+        from (select aa.* from album aa limit ${(curPage-1)*pageSize},${pageSize}) p left join chapter s on p.id=s.a_id
+    </select>
+</mapper>

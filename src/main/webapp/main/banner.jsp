@@ -69,7 +69,7 @@
             fitColumns: true,
             pagination: true,
             pageSize: 3,
-            pageList: [3, 5, 7],
+            pageList: [3,5,7],
             toolbar:toolbar,
             view: detailview,
             detailFormatter: function(rowIndex, rowData){
