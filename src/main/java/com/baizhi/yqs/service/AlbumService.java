@@ -11,4 +11,5 @@ public interface AlbumService {
     Album getOne(Integer id);
     void addOne(Album album);
     List<Album>queryAllAlbum();
+    List<Album>getAll();
 }

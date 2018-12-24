@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface AlbumMapper extends Mapper<Album> {
     List<Album> selectByPage(@Param("curPage" )Integer curPage, @Param("pageSize")Integer pageSize);
+    List<Album>selectAll1();
 }

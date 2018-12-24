@@ -12,24 +12,26 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.UUID;
+
 
 @RestController
 @RequestMapping("addFile")
 public class ChapterController {
     @Autowired
     ChapterService chapterService;
+
     @RequestMapping("addChapter")
-    public void addChapter(Chapter chapter, MultipartFile path, HttpServletRequest request){
+    public void addChapter(Chapter chapter, MultipartFile path, HttpServletRequest request) {
         //根据相对路径获取绝对路径
         String realPath = request.getSession().getServletContext().getRealPath("/music");
         //名称
         String filename = path.getOriginalFilename();
         //目标文件
-        File file = new File(realPath,path.getOriginalFilename());
+        File file = new File(realPath, path.getOriginalFilename());
 
         //计算音频时长大小
         long length = 0L;
@@ -43,8 +45,8 @@ public class ChapterController {
             //如果这里有异常也定义返回的map为失败
         }
         //打印一下文件时长
-        System.out.println(length/1000/60+"分"+length/1000%60+"秒");
-        String time =length/1000/60+"分"+length/1000%60+"秒";
+        System.out.println(length / 1000 / 60 + "分" + length / 1000 % 60 + "秒");
+        String time = length / 1000 / 60 + "分" + length / 1000 % 60 + "秒";
         //得到音频内存大小，是一个以字节为单位的long类型的数值
         //在此我用BigDecimal将其保留两位小数
         BigDecimal size = new BigDecimal(path.getSize());
@@ -59,7 +61,7 @@ public class ChapterController {
             path.transferTo(file);
             //2.插入Chapter到数据库（url的名字寻到Chapter）
 
-            String id = UUID.randomUUID().toString().replace("-","");
+            String id = UUID.randomUUID().toString().replace("-", "");
             chapter.setId(id);
             chapter.setUrl(filename);
             chapter.setSize(doubleValue);
@@ -73,20 +75,21 @@ public class ChapterController {
         }
 
 
-
     }
+
     @RequestMapping("addq1")
-    public void addChapter(Chapter chapter){
+    public void addChapter(Chapter chapter) {
 
 
-            String id = UUID.randomUUID().toString().replace("-","");
-            chapter.setId(id);
-            System.out.println(chapter);
-            chapterService.addOneChapter(chapter);
+        String id = UUID.randomUUID().toString().replace("-", "");
+        chapter.setId(id);
+        System.out.println(chapter);
+        chapterService.addOneChapter(chapter);
 
     }
+
     @RequestMapping("download")
-    public void downloadChapter(HttpServletRequest request,HttpServletResponse response,String musicName) throws Exception {
+    public void downloadChapter(HttpServletRequest request, HttpServletResponse response, String musicName) throws Exception {
         //首先为了保险起见，打印一接收的文件名
 
         System.out.println(musicName);

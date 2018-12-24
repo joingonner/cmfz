@@ -25,4 +25,8 @@
         select p.id pid,p.title ptitle,p.count pcount,p.cover_img pcoverimg,p.score pscore,p.auther pauther,p.broadcast pbroadcast,p.brief pbrief,p.pub_date ppubdate,s.id sid,s.title stitle,s.size ssize,s.duration sduration,s.url surl,s.upload_date suploaddate,s.a_id said
         from (select aa.* from album aa limit ${(curPage-1)*pageSize},${pageSize}) p left join chapter s on p.id=s.a_id
     </select>
+    <select id="selectAll1" resultMap="res">
+       select p.id pid,p.title ptitle,p.count pcount,p.cover_img pcoverimg,p.score pscore,p.auther pauther,p.broadcast pbroadcast,p.brief pbrief,p.pub_date ppubdate,s.id sid,s.title stitle,s.size ssize,s.duration sduration,s.url surl,s.upload_date suploaddate,s.a_id said
+        from album p left join chapter s on p.id=s.a_id
+    </select>
 </mapper>

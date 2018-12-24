@@ -1,6 +1,7 @@
 <%@page pageEncoding="UTF-8" %>
 <script type="text/javascript">
     var id;
+    var rr;
     $("#updateAlbum").dialog({
         width: 400,
         height: 200,
@@ -30,6 +31,7 @@
             var row = $("#album").treegrid("getSelected");
             if (row != null) {
                 id = row.id;
+                rr=row;
                 $("#updateAlbum").dialog("open");
             } else {
                 alert("请先选中修改行")
@@ -61,14 +63,16 @@
                 }else {
                     location.href="${pageContext.request.contextPath}/addFile/download?musicName="+row.url;
                 }
-
-
-                /* $("#album").edatagrid("editRow", index);*/
-
             } else {
                 alert("请先选中行")
             }
 
+        }
+    },'-', {
+        text: "导出",
+        iconCls: 'icon-remove',
+        handler: function () {
+            location.href="${pageContext.request.contextPath}/export"
         }
     }]
     $(function () {

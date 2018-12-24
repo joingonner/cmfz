@@ -45,4 +45,12 @@ public class AlbumServiceImpl implements AlbumService {
         return albumList;
     }
 
+    @Override
+    public List<Album> getAll() {
+
+        List<Album> list = albumMapper.selectAll1();
+
+        return list;
+    }
+
 }

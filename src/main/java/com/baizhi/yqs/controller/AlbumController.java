@@ -1,16 +1,22 @@
 package com.baizhi.yqs.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baizhi.yqs.dto.AlbumDto;
 import com.baizhi.yqs.entity.Album;
 import com.baizhi.yqs.service.AlbumService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 @RestController
@@ -67,5 +73,25 @@ public class AlbumController {
     public List<Album> getAllAlbum(){
         List<Album> list = albumService.queryAllAlbum();
         return list;
+    }
+    @RequestMapping("export")
+    public void export(HttpServletResponse response,HttpServletRequest request){
+        List<Album> albumList = albumService.getAll();
+        for (Album album : albumList) {
+            String path ="/img/"+album.getCoverImg();
+            String realPath = request.getSession().getServletContext().getRealPath(path);
+            System.out.println(realPath);
+            album.setCoverImg(realPath);
+        }
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("专辑和音频", "专辑表"),
+                Album.class, albumList);
+        try {
+            String encode = URLEncoder.encode("Album.xls", "UTF-8");
+            response.setHeader("content-disposition","attachment;filename="+encode);
+            response.setContentType("application/vnd.ms-excel");
+            workbook.write(response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
