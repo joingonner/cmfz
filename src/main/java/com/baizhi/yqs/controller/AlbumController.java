@@ -92,6 +92,7 @@ public class AlbumController {
             workbook.write(response.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 }
